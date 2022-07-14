@@ -1552,8 +1552,7 @@ export class UniswapRouterFactory {
     const expectedConvertQuoteOrTokenAmountInMaxWithSlippage =
       this.getExpectedConvertQuoteOrTokenAmountInMaxWithSlippage(
         expectedConvertQuote,
-        direction,
-        uniswapVersion
+        direction
       );
 
     const tradeExpires = this.generateTradeDeadlineUnixTime();
@@ -1657,8 +1656,7 @@ export class UniswapRouterFactory {
     const expectedConvertQuoteOrTokenAmountInMaxWithSlippage =
       this.getExpectedConvertQuoteOrTokenAmountInMaxWithSlippage(
         expectedConvertQuote,
-        direction,
-        uniswapVersion
+        direction
       );
 
     const tradeExpires = this.generateTradeDeadlineUnixTime();
@@ -1791,8 +1789,7 @@ export class UniswapRouterFactory {
     const expectedConvertQuoteOrTokenAmountInMaxWithSlippage =
       this.getExpectedConvertQuoteOrTokenAmountInMaxWithSlippage(
         expectedConvertQuote,
-        direction,
-        uniswapVersion
+        direction
       );
 
     const tradeExpires = this.generateTradeDeadlineUnixTime();
@@ -1922,18 +1919,14 @@ export class UniswapRouterFactory {
    */
   private getExpectedConvertQuoteOrTokenAmountInMaxWithSlippage(
     expectedConvertQuote: string,
-    tradeDirection: TradeDirection,
-    uniswapVersion: UniswapVersion
+    tradeDirection: TradeDirection
   ): string {
     const decimals =
       tradeDirection === TradeDirection.input
         ? this._toToken.decimals
         : this._fromToken.decimals;
 
-    if (
-      tradeDirection === TradeDirection.output &&
-      uniswapVersion === UniswapVersion.v3
-    ) {
+    if (tradeDirection === TradeDirection.output) {
       return new BigNumber(expectedConvertQuote)
         .plus(
           new BigNumber(expectedConvertQuote)
